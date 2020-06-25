@@ -5,10 +5,9 @@
         <div class="row">
             <div class="col-12">
                 <h1>Thêm mới tỉnh thành</h1>
-{{--                {{route('cities.update',$city->id)}}--}}
             </div>
             <div class="col-12">
-                <form method="post" action="">
+                <form method="post" action="{{route('cities.update',$city->id)}}">
                     @csrf
                     <div class="form-group">
                         <label>Tên tỉnh</label>

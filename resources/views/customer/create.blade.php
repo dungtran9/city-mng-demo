@@ -9,17 +9,35 @@
             <div class="col-12">
                 <form method="post" action="{{ route('customers.store') }}">
                     @csrf
+                    @if($errors->all())
+                        <div class="alert alert-danger" role="alert">
+                            Có vấn đề khi tạo mới khách hàng.
+                        </div>
+                    @endif
                     <div class="form-group">
-                        <label>Tên khách hàng</label>
-                        <input type="text" class="form-control" name="name"  placeholder="Enter name" required>
+                        <label class="{{($errors->first('name')) ? 'text-danger' : ''}}">
+                            <strong>Tên khách hàng</strong></label>
+                        <input type="text" class="form-control {{($errors->first('name')) ? 'is-invalid' : ''}}" name="name" value="{{old('name')}}"
+                       placeholder="Enter name" >
+                        @if($errors->first('name'))
+                            <p class="text-danger">{{ $errors->first('name') }}</p>
+                        @endif
+               </div>
+               <div class="form-group">
+                   <label class="{{($errors->first('email')) ? 'text-danger' : ''}}"> <strong>Email</strong></label>
+
+                   <input type="email" class="form-control {{($errors->first('email')) ? 'is-invalid' : ''}}" name="email" value="{{old('email')}}"
+                               placeholder="Enter email" >
+                   @if($errors->first('email'))
+                       <p class="text-danger">{{ $errors->first('email') }}</p>
+                   @endif
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="Enter email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Ngày sinh</label>
-                        <input type="date" class="form-control" name="dob" required>
+                        <label class="{{($errors->first('dob')) ? 'text-danger' : ''}}"><strong>Ngày sinh</strong></label>
+                        <input type="date" class="form-control {{($errors->first('email')) ? 'is-invalid' : ''}}" name="dob" value="{{old('dob')}}" >
+                        @if($errors->first('dob'))
+                            <p class="text-danger">{{ $errors->first('dob') }}</p>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label>Tỉnh thành</label>
